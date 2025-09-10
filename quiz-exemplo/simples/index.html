@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Simples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f5f5f5;
+      padding: 30px;
+    }
+
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .opcao {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #EE85B5;
+      color: white;
+      cursor: pointer;
+    }
+
+    .opcao:hover {
+      background: #9f5979;
+    }
+
+    #nextBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #nextBtn:hover {
+      background: #218838;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-box">
+    <h2 id="pergunta">Carregando pergunta...</h2>
+
+    <button class="opcao" onclick="responder(0)" id="opcao0"></button>
+    <button class="opcao" onclick="responder(1)" id="opcao1"></button>
+    <button class="opcao" onclick="responder(2)" id="opcao2"></button>
+
+    <button id="nextBtn" onclick="proxima()">Próxima</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const perguntas = [
+      {
+        pergunta: "Qual é a linguagem usada para criar páginas da web?",
+        opcoes: ["HTML", "Python", "C++"],
+        correta: 0
+      },
+      {
+        pergunta: "Qual símbolo representa o operador 'E lógico' em JavaScript?",
+        opcoes: ["||", "&&", "!="],
+        correta: 1
+      },
+      {
+        pergunta: "Qual destes é um tipo de loop em JavaScript?",
+        opcoes: ["repeat", "loop", "for"],
+        correta: 2
+      }
+    ];
+
+    let indice = 0;
+    let acertos = 0;
+
+    function mostrarPergunta() {
+      const p = perguntas[indice];
+      document.getElementById("pergunta").textContent = p.pergunta;
+      document.getElementById("opcao0").textContent = p.opcoes[0];
+      document.getElementById("opcao1").textContent = p.opcoes[1];
+      document.getElementById("opcao2").textContent = p.opcoes[2];
+      document.getElementById("resultado").textContent = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`opcao${i}`).disabled = false;
+        document.getElementById(`opcao${i}`).style.background = '#EE85B5';
+      }
+    }
+
+    function responder(escolhida) {
+      const correta = perguntas[indice].correta;
+
+      if (escolhida === correta) {
+        acertos++;
+        document.getElementById("resultado").textContent = "✅ Acertou!";
+        document.getElementById(`opcao${escolhida}`).style.background = "green";
+      } else {
+        document.getElementById("resultado").textContent = "❌ Errou!";
+        document.getElementById(`opcao${escolhida}`).style.background = "red";
+        document.getElementById(`opcao${correta}`).style.background = "green";
+      }
+
+    
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`opcao${i}`).disabled = true;
+      }
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function proxima() {
+      indice++;
+      if (indice < perguntas.length) {
+        mostrarPergunta();
+      } else {
+        document.getElementById("pergunta").textContent = "Fim do Quiz!";
+        document.getElementById("opcao0").style.display = "none";
+        document.getElementById("opcao1").style.display = "none";
+        document.getElementById("opcao2").style.display = "none";
+        document.getElementById("nextBtn").style.display = "none";
+        document.getElementById("resultado").textContent = `Você acertou ${acertos} de ${perguntas.length}.`;
+      }
+    }
+
+   
+    mostrarPergunta();
+  </script>
+
+</body>
+</html>

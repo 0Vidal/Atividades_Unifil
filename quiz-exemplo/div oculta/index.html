@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz de Lógica de Programação</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Página 1: Tela Inicial -->
+    <div class="page" id="page1">
+      <h1>Quiz</h1>
+      <button onclick="startQuiz()">Começar</button>
+    </div>
+
+    <!-- Página 2: Pergunta 1 -->
+    <div class="page" id="page2">
+      <h2>1</h2>
+      <button onclick="responder(1, true)">1</button>
+      <button onclick="responder(1, false)">2</button>
+      <button onclick="responder(1, false)">3</button>
+    </div>
+
+    <!-- Página 3: Pergunta 2 -->
+    <div class="page" id="page3">
+      <h2>2</h2>
+      <button onclick="responder(2, false)">1</button>
+      <button onclick="responder(2, true)">2</button>
+      <button onclick="responder(2, false)">3</button>
+    </div>
+
+    <!-- Página 4: Pergunta 3 -->
+    <div class="page" id="page4">
+      <h2>3</h2>
+      <button onclick="responder(3, false)">1</button>
+      <button onclick="responder(3, false)">2</button>
+      <button onclick="responder(3, true)">3</button>
+    </div>
+
+    <!-- Página 5: Resultado -->
+    <div class="page" id="page5">
+      <h1>Resultado</h1>
+      <p id="score"></p>
+      <button onclick="startQuiz()">Tentar novamente</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
